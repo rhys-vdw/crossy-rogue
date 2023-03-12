@@ -11,16 +11,15 @@ namespace Frog {
     readonly EcsPoolInject<Collision> _collisions;
     readonly EcsCustomInject<Map> _map;
 
-    int[,] _groundMap;
-    const int Empty = -1;
+    int?[,] _groundMap;
 
     public void PreInit(IEcsSystems systems) {
       var map = _map.Value;
-      _groundMap = new int[map.Width, map.Height];
+      _groundMap = new int?[map.Width, map.Height];
     }
 
     public void Run(IEcsSystems systems) {
-      _groundMap.Fill(Empty);
+      _groundMap.Fill(null);
       foreach (var entity in _filter.Value) {
         ref var m = ref _moves.Value.Get(entity);
         ref var a = ref _actors.Value.Get(entity);
@@ -42,12 +41,9 @@ namespace Frog {
       }
     }
 
-    int? GetGround(Vector2Int position) {
-      if (_map.Value.HasTile(position)) {
-        var value = _groundMap[position.x, position.y];
-        return value == Empty ? null : value;
-      }
-      return null;
-    }
+    int? GetGround(Vector2Int position) =>
+      _map.Value.HasTile(position)
+        ? _groundMap[position.x, position.y]
+        : null;
   }
 }
