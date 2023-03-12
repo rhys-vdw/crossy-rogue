@@ -31,6 +31,7 @@ namespace Frog {
           b.Position.y,
           0
         );
+        v.ActorView.name = $"{entity}:{b.Config.name}";
         if (_moves.Value.Has(entity)) {
           ref var move = ref _moves.Value.Get(entity);
           v.ActorView.SetDirection(move.Direction);
