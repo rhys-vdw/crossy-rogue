@@ -1,7 +1,23 @@
 using UnityEngine;
+using System;
+using Random = UnityEngine.Random;
 
 namespace Frog {
   public static class VectorUtility {
+    public static Vector2Int ManhattenMoveToward(Vector2Int from, Vector2Int to, int steps) {
+      var delta = to - from;
+      var absX = Mathf.Abs(delta.x);
+      var absY = Mathf.Abs(delta.y);
+      if (absX > absY) {
+        from.x += Math.Sign(delta.x) * Mathf.Min(steps, absX);
+      } else {
+        from.y += Math.Sign(delta.y) * Mathf.Min(steps, absY);
+      }
+      return from;
+    }
+
+    public static int ManhattenMagnitude(Vector2Int v) =>
+      Mathf.Abs(v.x) + Mathf.Abs(v.y);
     public static Vector2 Round(Vector2 v) =>
       new (Mathf.Round(v.x), Mathf.Round(v.y));
 
