@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace Frog {
   class CameraSystem : IEcsRunSystem {
-    EcsCustomInject<Shared> _shared;
-    EcsCustomInject<Map> _map;
-    EcsPoolInject<Body> _actors;
+    readonly EcsCustomInject<Shared> _shared;
+    readonly EcsCustomInject<Map> _map;
+    readonly EcsPoolInject<Body> _actors;
 
     public void Run(IEcsSystems systems) {
       ref var actor = ref _actors.Value.Get(_shared.Value.PlayerEntity);
