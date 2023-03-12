@@ -41,7 +41,7 @@ namespace Frog {
             spawnerConfig.Actor
           ));
           _world.AddComponent(actorEntity, new Move(new(
-            x: (s.Info.IsLeft ? 1 : -1) * spawnerConfig.Actor.Speed,
+            x: s.Info.IsLeft ? 1 : -1,
             y: 0
           )));
           s.NextSpawnTurn = time.TurnCount + spawnerConfig.RandomInterval();
