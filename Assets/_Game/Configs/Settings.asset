@@ -24,4 +24,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b8974a82dc6b41944a20f516fb139364, type: 2}
   - {fileID: 11400000, guid: 3efec0b854393604b87a9e3edf0a96dd, type: 2}
   - {fileID: 11400000, guid: 8c67584cb26f42d44bc8ab5f6fead645, type: 2}
+  - {fileID: 11400000, guid: 14a229ee80efc244cb68700124c7b8fb, type: 2}
   _riverSpawners: []

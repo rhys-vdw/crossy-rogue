@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SportsCarSpawner_Sparse
   m_EditorClassIdentifier: 
   <Actor>k__BackingField: {fileID: 11400000, guid: b3d5345e5cceb8146ad2b70151feb8fa, type: 2}
-  <MinInterval>k__BackingField: 8
-  <MaxInterval>k__BackingField: 12
+  <MinInterval>k__BackingField: 6
+  <MaxInterval>k__BackingField: 8

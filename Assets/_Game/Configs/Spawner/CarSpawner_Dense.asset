@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Actor>k__BackingField: {fileID: 11400000, guid: 0ef783219a12bb948b11adbaf9e67881, type: 2}
   <MinInterval>k__BackingField: 1
-  <MaxInterval>k__BackingField: 3
+  <MaxInterval>k__BackingField: 5
