@@ -15,3 +15,6 @@ MonoBehaviour:
   <MapSize>k__BackingField: {x: 20, y: 640}
   <FrogActor>k__BackingField: {fileID: 11400000, guid: 4adcd10b67923214cac3c30beea8ea7a, type: 2}
   <GrassTile>k__BackingField: {fileID: 11400000, guid: 2fe211d90ec34564ca6f9370608475c3, type: 2}
+  <RoadTop>k__BackingField: {fileID: 11400000, guid: 3aa9c47a332da3844aa6cc0a78e788f1, type: 2}
+  <RoadMiddle>k__BackingField: {fileID: 11400000, guid: 2ce2670faa83f3a42b77d5a0d2baf6a5, type: 2}
+  <RoadBottom>k__BackingField: {fileID: 11400000, guid: 2721434d8ea8bea4ebf537a4f8e468de, type: 2}

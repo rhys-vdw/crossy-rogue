@@ -12,5 +12,20 @@ namespace Frog {
         }
       }
     }
+
+    public static void Road(Map map, int startY, int height, SettingsConfig settings) {
+      for (var x = 0; x < map.Width; x++) {
+        map.SetTile(x, startY, settings.RoadBottom);
+      }
+      var topY = startY + height - 1;
+      for (var y = startY + 1; y < topY; y++) {
+        for (var x = 0; x < map.Width; x++) {
+          map.SetTile(x, y, settings.RoadMiddle);
+        }
+      }
+      for (var x = 0; x < map.Width; x++) {
+        map.SetTile(x, topY, settings.RoadTop);
+      }
+    }
   }
 }

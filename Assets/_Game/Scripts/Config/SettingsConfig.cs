@@ -14,5 +14,11 @@ namespace Frog {
     [field: Header("Tiles")]
     [field: SerializeField]
     public TileProbabilityConfig GrassTile { get; private set; }
+    [field: SerializeField]
+    public TileConfig RoadTop { get; private set; }
+    [field: SerializeField]
+    public TileConfig RoadMiddle { get; private set; }
+    [field: SerializeField]
+    public TileConfig RoadBottom { get; private set; }
   }
 }
