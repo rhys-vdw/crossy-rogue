@@ -9,6 +9,7 @@ namespace Frog {
     public void Initialize(ActorConfig config) {
       _renderer.sprite = config.Sprite;
       _renderer.color = config.Color;
+      _renderer.sortingOrder = config.SortingOrder;
     }
 
     public void SetDirection(Vector2Int direction) {
