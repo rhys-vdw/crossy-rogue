@@ -1,4 +1,5 @@
 using Leopotam.EcsLite;
+using Leopotam.EcsLite.ExtendedSystems;
 using UnityEngine;
 
 namespace Frog {
@@ -9,29 +10,40 @@ namespace Frog {
     static readonly KeyCode[] LeftKeys = new [] { KeyCode.LeftArrow, KeyCode.A, KeyCode.Q };
 
     EcsWorld _world;
+    EcsPool<Move> _moves;
+    readonly int _playerEntity;
+
+    public InputSystem(int playerEntity) {
+      _playerEntity = playerEntity;
+    }
 
     public void PreInit(IEcsSystems systems) {
       _world = systems.GetWorld();
+      _moves = _world.GetPool<Move>();
     }
 
     public void Run(IEcsSystems systems) {
-      var move = new Vector2Int();
+      var direction = new Vector2Int();
       if (AnyKeyDown(UpKeys)) {
-        move.y++;
+        direction.y++;
       }
       if (AnyKeyDown(RightKeys)) {
-        move.x++;
+        direction.x++;
       }
       if (AnyKeyDown(DownKeys)) {
-        move.y--;
+        direction.y--;
       }
       if (AnyKeyDown(LeftKeys)) {
-        move.x--;
+        direction.x--;
       }
 
-      if (move != Vector2Int.zero) {
-        var entity = _world.NewEntity();
-        _world.AddComponent(entity, new InputState(move));
+      if (direction != Vector2Int.zero) {
+        // Set move.
+        ref var move = ref _moves.Get(_playerEntity);
+        move.Direction = direction;
+
+        // Enable turn.
+        _world.SetGroup(Group.Turn, true);
       }
     }
 

@@ -1,11 +1,21 @@
 using UnityEngine;
 
 namespace Frog {
-  public struct InputState {
-    public Vector2Int Move;
+  struct Player { }
 
-    public InputState(Vector2Int move) {
-      Move = move;
+  struct Move {
+    public Vector2Int Direction;
+
+    public Move(Vector2Int move) {
+      Direction = move;
+    }
+  }
+
+  struct Transform {
+    public Vector2Int Position;
+
+    public Transform(Vector2Int position) {
+      Position = position;
     }
   }
 }

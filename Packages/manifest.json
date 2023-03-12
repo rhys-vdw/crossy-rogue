@@ -43,7 +43,8 @@
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0",
-    "com.leopotam.ecslite.extendedsystems": "2023.1.22"
+    "com.leopotam.ecslite.extendedsystems": "2023.1.22",
+    "com.leopotam.ecslite.unityeditor": "2022.11.22"
   },
   "scopedRegistries": [
     {
@@ -52,6 +53,7 @@
       "scopes": [
         "com.leopotam.ecslite",
         "com.leopotam.ecslite.extendedsystems",
+        "com.leopotam.ecslite.unityeditor",
         "com.openupm"
       ]
     }
