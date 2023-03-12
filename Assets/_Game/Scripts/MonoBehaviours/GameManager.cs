@@ -9,13 +9,16 @@ namespace Frog {
   class Shared {
     public readonly int PlayerEntity;
     public readonly Transform ViewParent;
+    public readonly Camera Camera;
 
     public Shared(
       int playerEntity,
-      Transform viewParent
+      Transform viewParent,
+      Camera camera
     ) {
       PlayerEntity = playerEntity;
       ViewParent = viewParent;
+      Camera = camera;
     }
   }
 
@@ -55,7 +58,8 @@ namespace Frog {
 
       var shared = new Shared(
         playerEntity,
-        transform
+        transform,
+        _camera
       );
 
       var timeEntity = _world.NewEntity();
@@ -72,7 +76,7 @@ namespace Frog {
           new DeadSystem(),
           new PlayerBoundsSystem(_settings.MapSize),
           new ViewSystem(),
-          new CameraSystem(playerEntity, _camera, map.Width),
+          new CameraSystem(),
           new DisableGroupSystem(Group.Turn),
           new DeleteMarkedSystem(),
           new TurnSystem(timeEntity)

@@ -1,31 +1,20 @@
 using Leopotam.EcsLite;
+using Leopotam.EcsLite.Di;
 using UnityEngine;
 
 namespace Frog {
-  class CameraSystem : IEcsPreInitSystem, IEcsRunSystem {
-    EcsWorld _world;
-    int _playerEntity;
-    Camera _camera;
-    EcsPool<Body> _actors;
-    float _x;
-
-    public CameraSystem(int playerEntity, Camera camera, float mapWidth) {
-      _playerEntity = playerEntity;
-      _camera = camera;
-      _x = mapWidth / 2;
-    }
-
-    public void PreInit(IEcsSystems systems) {
-      _world = systems.GetWorld();
-      _actors = _world.GetPool<Body>();
-    }
+  class CameraSystem : IEcsRunSystem {
+    EcsCustomInject<Shared> _shared;
+    EcsCustomInject<Map> _map;
+    EcsPoolInject<Body> _actors;
 
     public void Run(IEcsSystems systems) {
-      ref var actor = ref _actors.Get(_playerEntity);
-      var minY = _camera.orthographicSize - 0.5f;
-      var t = _camera.transform;
+      ref var actor = ref _actors.Value.Get(_shared.Value.PlayerEntity);
+      var camera = _shared.Value.Camera;
+      var minY = camera.orthographicSize - 0.5f;
+      var t = camera.transform;
       t.position = new(
-        _x,
+        _map.Value.Width / 2f,
         Mathf.Max(actor.Position.y, minY),
         t.position.z
       );
