@@ -3,6 +3,10 @@ using UnityEngine;
 namespace Frog {
   struct Player { }
 
+  struct TimeState {
+    public int TurnCount;
+  }
+
   struct Move {
     public Vector2Int Direction;
 
@@ -29,6 +33,16 @@ namespace Frog {
 
     public View(ActorView view) {
       ActorView = view;
+    }
+  }
+
+  struct Spawner {
+    public SpawnerInfo Info;
+    public int NextSpawnTurn;
+
+    public Spawner(SpawnerInfo info, int firstSpawnTurn) {
+      Info = info;
+      NextSpawnTurn = firstSpawnTurn;
     }
   }
 }

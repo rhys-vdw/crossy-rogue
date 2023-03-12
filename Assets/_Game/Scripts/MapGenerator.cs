@@ -4,6 +4,17 @@ using UnityEngine;
 
 namespace Frog {
   static class MapGenerator {
+    public static void SetSpawners(Map map, int startY, int height, SpawnerProbabilityConfig spawners) {
+      var max = startY + height;
+      for (var y = startY; y < max; y++) {
+        map.AddSpawner(new SpawnerInfo(
+          spawners.Sample(),
+          y,
+          Random.value > 0.5f
+        ));
+      }
+    }
+
     public static void Grass(Map map, int startY, int height, SettingsConfig settings) {
       var max = startY + height;
       for (var y = startY; y < max; y++) {

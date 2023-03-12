@@ -19,3 +19,4 @@ MonoBehaviour:
   <RoadMiddle>k__BackingField: {fileID: 11400000, guid: 2ce2670faa83f3a42b77d5a0d2baf6a5, type: 2}
   <RoadBottom>k__BackingField: {fileID: 11400000, guid: 2721434d8ea8bea4ebf537a4f8e468de, type: 2}
   <Water>k__BackingField: {fileID: 11400000, guid: d1aa80596e4826b4b8e46cf6b720c8d4, type: 2}
+  <RoadSpawners>k__BackingField: {fileID: 11400000, guid: bf359407637162f4a8176920e0d2bd26, type: 2}

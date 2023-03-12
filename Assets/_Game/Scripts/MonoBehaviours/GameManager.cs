@@ -27,6 +27,7 @@ namespace Frog {
       var map = new Map(_settings.MapSize);
       MapGenerator.Grass(map, 0, map.Height, _settings);
       MapGenerator.Road(map, 8, 3, _settings);
+      MapGenerator.SetSpawners(map, 8, 3, _settings.RoadSpawners);
       MapGenerator.River(map, 4, 3, _settings);
       _mapManager.Initialize(map);
 
@@ -38,14 +39,19 @@ namespace Frog {
       ));
       _world.AddComponent(playerEntity, new Move(Vector2Int.zero));
 
+      var timeEntity = _world.NewEntity();
+      _world.AddComponent(timeEntity, new TimeState());
+
       _systems
         .Add(new InputSystem(playerEntity))
         .AddGroup(Group.Turn, false, null,
+          new SpawnerSystem(map, timeEntity),
           new MoveSystem(),
           new PlayerBoundsSystem(_settings.MapSize),
           new DisableGroupSystem(Group.Turn),
           new ViewSystem(transform, _actorPrefab),
-          new CameraSystem(playerEntity, _camera, map.Width)
+          new CameraSystem(playerEntity, _camera, map.Width),
+          new TurnSystem(timeEntity)
         );
 
 #if UNITY_EDITOR

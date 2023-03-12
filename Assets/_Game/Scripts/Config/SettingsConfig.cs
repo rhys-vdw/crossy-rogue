@@ -22,5 +22,10 @@ namespace Frog {
     public TileConfig RoadBottom { get; private set; }
     [field: SerializeField]
     public TileConfig Water { get; private set; }
+
+    [field: Header("Spawners")]
+    [field: SerializeField]
+    public SpawnerProbabilityConfig RoadSpawners { get; private set; }
+    public SpawnerProbabilityConfig RiverSpawners { get; private set; }
   }
 }
