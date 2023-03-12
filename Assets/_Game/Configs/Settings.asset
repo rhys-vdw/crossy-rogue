@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d921acc12b973c49bfdd6e10e1d8e51, type: 3}
   m_Name: Settings
   m_EditorClassIdentifier: 
+  <ActorViewPrefab>k__BackingField: {fileID: 9140266354138180587, guid: 5d48fdc05219a1f459163bdbc672a5f0, type: 3}
   <MapSize>k__BackingField: {x: 20, y: 640}
   <FrogActor>k__BackingField: {fileID: 11400000, guid: 4adcd10b67923214cac3c30beea8ea7a, type: 2}
   <GrassTile>k__BackingField: {fileID: 11400000, guid: 2fe211d90ec34564ca6f9370608475c3, type: 2}

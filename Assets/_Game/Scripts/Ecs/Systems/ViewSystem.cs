@@ -9,13 +9,8 @@ namespace Frog {
     readonly EcsPoolInject<Body> _bodies;
     readonly EcsPoolInject<View> _views;
     readonly EcsPoolInject<Move> _moves;
-    readonly Transform _viewParent;
-    readonly ActorView _actorPrefab;
-
-    public ViewSystem(Transform viewParent, ActorView actorPrefab) {
-      _viewParent = viewParent;
-      _actorPrefab = actorPrefab;
-    }
+    readonly EcsCustomInject<Shared> _shared;
+    readonly EcsCustomInject<SettingsConfig> _settings;
 
     public void Run(IEcsSystems systems) {
       // Create missing entities.
@@ -45,10 +40,10 @@ namespace Frog {
 
     ActorView CreateView(ActorConfig config) {
       var actor = Object.Instantiate(
-        _actorPrefab,
+        _settings.Value.ActorViewPrefab,
         Vector3.zero,
         Quaternion.identity,
-        _viewParent
+        _shared.Value.ViewParent
       );
       actor.Initialize(config);
       return actor;

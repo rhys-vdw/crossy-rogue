@@ -4,6 +4,10 @@ using System.Collections.Generic;
 namespace Frog {
   [CreateAssetMenu(menuName = nameof(Frog) + "/" + nameof(SettingsConfig))]
   class SettingsConfig : ScriptableObject {
+    [field: Header("Prefabs")]
+    [field: SerializeField]
+    public ActorView ActorViewPrefab { get; private set; }
+
     [field: Header("Map")]
     [field: SerializeField]
     public Vector2Int MapSize { get; private set; } = new (32, 32 * 20);

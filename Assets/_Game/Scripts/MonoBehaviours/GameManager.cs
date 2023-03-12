@@ -8,9 +8,14 @@ using Leopotam.EcsLite.Di;
 namespace Frog {
   class Shared {
     public readonly int PlayerEntity;
+    public readonly Transform ViewParent;
 
-    public Shared(int playerEntity) {
+    public Shared(
+      int playerEntity,
+      Transform viewParent
+    ) {
       PlayerEntity = playerEntity;
+      ViewParent = viewParent;
     }
   }
 
@@ -21,9 +26,6 @@ namespace Frog {
 
     [Header("Config")]
     [SerializeField] SettingsConfig _settings;
-
-    [Header("Sprites")]
-    [SerializeField] ActorView _actorPrefab;
 
     EcsSystems _systems;
     EcsWorld _world;
@@ -51,7 +53,10 @@ namespace Frog {
       ));
       _world.AddComponent(playerEntity, new Move(Vector2Int.zero));
 
-      var shared = new Shared(playerEntity);
+      var shared = new Shared(
+        playerEntity,
+        transform
+      );
 
       var timeEntity = _world.NewEntity();
       _world.AddComponent(timeEntity, new TimeState());
@@ -66,7 +71,7 @@ namespace Frog {
           new CollisionSystem(),
           new DeadSystem(),
           new PlayerBoundsSystem(_settings.MapSize),
-          new ViewSystem(transform, _actorPrefab),
+          new ViewSystem(),
           new CameraSystem(playerEntity, _camera, map.Width),
           new DisableGroupSystem(Group.Turn),
           new DeleteMarkedSystem(),
