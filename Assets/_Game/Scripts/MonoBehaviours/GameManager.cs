@@ -3,6 +3,7 @@
 using UnityEngine;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.ExtendedSystems;
+using Leopotam.EcsLite.Di;
 
 namespace Frog {
   class GameManager : MonoBehaviour {
@@ -63,7 +64,9 @@ namespace Frog {
       ));
 #endif
 
-      _systems.Init();
+      _systems
+        .Inject()
+        .Init();
     }
 
     void Update() {

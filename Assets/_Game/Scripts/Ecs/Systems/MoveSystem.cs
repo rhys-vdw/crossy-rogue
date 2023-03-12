@@ -1,23 +1,16 @@
 using Leopotam.EcsLite;
+using Leopotam.EcsLite.Di;
 
 namespace Frog {
-  class MoveSystem : IEcsPreInitSystem, IEcsRunSystem {
-    EcsWorld _world;
-    EcsFilter _filter;
-    EcsPool<Move> _moves;
-    EcsPool<Body> _actors;
-
-    public void PreInit(IEcsSystems systems) {
-      _world = systems.GetWorld();
-      _filter = _world.Filter<Move>().End();
-      _moves = _world.GetPool<Move>();
-      _actors = _world.GetPool<Body>();
-    }
+  class MoveSystem : IEcsRunSystem {
+    readonly EcsFilterInject<Inc<Move>> _filter;
+    readonly EcsPoolInject<Move> _moves;
+    readonly EcsPoolInject<Body> _actors;
 
     public void Run(IEcsSystems systems) {
-      foreach (var entity in _filter) {
-        ref var m = ref _moves.Get(entity);
-        ref var a = ref _actors.Get(entity);
+      foreach (var entity in _filter.Value) {
+        ref var m = ref _moves.Value.Get(entity);
+        ref var a = ref _actors.Value.Get(entity);
         a.Position += m.Direction * a.Config.Speed;
       }
     }
