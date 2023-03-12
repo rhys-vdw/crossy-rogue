@@ -77,6 +77,7 @@ namespace Frog {
           new PlayerBoundsSystem(_settings.MapSize),
           new CreateViewsSystem(),
           new MoveViewSystem(),
+          new DeadViewSystem(),
           new CameraSystem(),
           new DisableGroupSystem(Group.Turn),
           new DeleteMarkedSystem(),

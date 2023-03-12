@@ -7,6 +7,8 @@ namespace Frog {
     [field: Header("Prefabs")]
     [field: SerializeField]
     public ActorView ActorViewPrefab { get; private set; }
+    [field: SerializeField]
+    public Transform SplatPrefab { get; private set; }
 
     [field: Header("Map")]
     [field: SerializeField]

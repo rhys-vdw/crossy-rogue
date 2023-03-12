@@ -23,15 +23,15 @@ namespace Frog {
       foreach (var entity in _filter.Value) {
         ref var m = ref _moves.Value.Get(entity);
         ref var a = ref _actors.Value.Get(entity);
-        var prev = a.Position;
-        var blocker = GetGround(prev);
+        a.Position += m.Direction * a.Config.Speed;
+        var blocker = GetGround(a.Position);
         if (blocker is int blockingEntity) {
           ref var c = ref _collisions.Value.Add(_world.Value.NewEntity());
           c.EntityA = entity;
           c.EntityB = blockingEntity;
+        } else {
+          SetGround(a.Position, entity);
         }
-        a.Position += m.Direction * a.Config.Speed;
-        SetGround(a.Position, entity);
       }
     }
 
