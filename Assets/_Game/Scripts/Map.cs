@@ -31,10 +31,13 @@ namespace Frog {
       _tiles[x, y] = tile;
     }
 
+    public bool HasTile(Vector2Int p) => HasTile(p.x, p.y);
+
+    public bool HasTile(int x, int y) =>
+      x >= 0 && x < Width && y >= 0 && y < Height;
+
     public TileConfig GetTile(int x, int y) =>
-      x >= 0 && x < Width && y >= 0 && y < Height
-        ? _tiles[x, y]
-        : null;
+      HasTile(x, y) ? _tiles[x, y] : null;
 
     public void AddSpawner(SpawnerInfo info) {
       _spawners.Add(info);

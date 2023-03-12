@@ -8,5 +8,6 @@ namespace Frog {
     [field: SerializeField] public Color Color { get; private set; } = Color.white;
     [field: SerializeField] public int Length { get; private set; } = 1;
     [field: SerializeField] public int Speed { get; private set; } = 1;
+    [field: SerializeField] public int CombatStrength { get; private set; } = 1;
   }
 }

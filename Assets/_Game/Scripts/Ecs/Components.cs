@@ -3,6 +3,9 @@ using UnityEngine;
 namespace Frog {
   struct Player { }
 
+  struct Dead { }
+  struct MarkedForDeletion { }
+
   struct TimeState {
     public int TurnCount;
   }
@@ -44,5 +47,10 @@ namespace Frog {
       Info = info;
       NextSpawnTurn = firstSpawnTurn;
     }
+  }
+
+  struct Collision {
+    public int EntityA;
+    public int EntityB;
   }
 }

@@ -51,10 +51,15 @@ namespace Frog {
         .AddGroup(Group.Turn, false, null,
           new SpawnerSystem(map, timeEntity),
           new MoveSystem(),
+          new CollisionSystem(),
+          new DeadSystem(),
           new PlayerBoundsSystem(_settings.MapSize),
-          new DisableGroupSystem(Group.Turn),
           new ViewSystem(transform, _actorPrefab),
           new CameraSystem(playerEntity, _camera, map.Width),
+          new DisableGroupSystem(Group.Turn)
+        )
+        .AddGroup(Group.Finalize, true, null,
+          new DeleteMarkedSystem(),
           new TurnSystem(timeEntity)
         );
 
@@ -65,6 +70,10 @@ namespace Frog {
 #endif
 
       _systems
+        .Inject(
+          map,
+          _settings
+        )
         .Inject()
         .Init();
     }
