@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6859480962648276898}
   - component: {fileID: 665403177286834489}
+  - component: {fileID: 5313840250051748064}
   m_Layer: 0
   m_Name: MapManager
   m_TagString: Untagged
@@ -44,3 +45,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08fc1b6d05fa8ff49a261d2b96a0e380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _tilePrefab: {fileID: 5626563862514206097, guid: 46fdd53729e100a4691d7ee34b1f6f73, type: 3}
+--- !u!156049354 &5313840250051748064
+Grid:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8933763925136046437}
+  m_Enabled: 1
+  m_CellSize: {x: 1, y: 1, z: 1}
+  m_CellGap: {x: 0, y: 0, z: 0}
+  m_CellLayout: 0
+  m_CellSwizzle: 0

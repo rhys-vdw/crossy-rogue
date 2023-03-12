@@ -18,7 +18,7 @@ namespace Frog {
     }
 
     public TileConfig GetTile(int x, int y) =>
-      x > 0 && x < Width && y > 0 && y < Height
+      x >= 0 && x < Width && y >= 0 && y < Height
         ? _tiles[x, y]
         : null;
   }

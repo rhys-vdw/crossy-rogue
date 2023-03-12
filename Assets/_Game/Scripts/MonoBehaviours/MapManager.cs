@@ -4,10 +4,27 @@ using UnityEngine;
 
 namespace Frog {
   class MapManager : MonoBehaviour {
+    [SerializeField] TileView _tilePrefab;
     Map _map;
 
     public void Initialize(Map map) {
       _map = map;
+      for (var y = 0; y < map.Height; y++) {
+        for (var x = 0; x < map.Width; x++) {
+          var tile = map.GetTile(x, y);
+          if (tile == null) {
+            Debug.LogError($"Tile is null at ({x}, {y})");
+          } else {
+            var view = Instantiate(
+              _tilePrefab,
+              new Vector3(x, y, 0),
+              Quaternion.identity,
+              transform
+            );
+            view.Initialize(tile);
+          }
+        }
+      }
     }
 
 #pragma warning disable IDE0051
