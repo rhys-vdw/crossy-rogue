@@ -4,19 +4,38 @@ using UnityEngine;
 namespace Frog {
   class ViewSystem : IEcsPreInitSystem, IEcsRunSystem {
     EcsWorld _world;
-    EcsFilter _filter;
+    EcsFilter _vithoutViewFilter;
+    EcsFilter _viewFilter;
     EcsPool<Body> _bodies;
     EcsPool<View> _views;
+    readonly Transform _viewParent;
+    readonly ActorView _actorPrefab;
+
+    public ViewSystem(Transform viewParent, ActorView actorPrefab) {
+      _viewParent = viewParent;
+      _actorPrefab = actorPrefab;
+    }
 
     public void PreInit(IEcsSystems systems) {
       _world = systems.GetWorld();
-      _filter = _world.Filter<View>().End();
+      _vithoutViewFilter = _world.Filter<Body>().Exc<View>().End();
+      _viewFilter = _world.Filter<View>().End();
       _bodies = _world.GetPool<Body>();
       _views = _world.GetPool<View>();
     }
 
     public void Run(IEcsSystems systems) {
-      foreach (var entity in _filter) {
+      // Create missing entities.
+      // TODO: Move to another system.
+      foreach (var entity in _vithoutViewFilter) {
+        ref var b = ref _bodies.Get(entity);
+        var instance = CreateView(b.Config);
+        ref var view = ref _views.Add(entity);
+        view.ActorView = instance;
+      }
+
+      // Update views.
+      foreach (var entity in _viewFilter) {
         ref var v = ref _views.Get(entity);
         ref var b = ref _bodies.Get(entity);
         v.ActorView.transform.position = new Vector3(
@@ -25,6 +44,17 @@ namespace Frog {
           0
         );
       }
+    }
+
+    ActorView CreateView(ActorConfig config) {
+      var actor = Object.Instantiate(
+        _actorPrefab,
+        Vector3.zero,
+        Quaternion.identity,
+        _viewParent
+      );
+      actor.Initialize(config);
+      return actor;
     }
   }
 }

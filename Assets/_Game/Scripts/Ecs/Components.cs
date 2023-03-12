@@ -13,9 +13,14 @@ namespace Frog {
 
   struct Body {
     public Vector2Int Position;
+    public ActorConfig Config;
 
-    public Body(Vector2Int position) {
+    public Body(
+      Vector2Int position,
+      ActorConfig config
+    ) {
       Position = position;
+      Config = config;
     }
   }
 

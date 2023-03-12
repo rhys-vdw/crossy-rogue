@@ -18,12 +18,6 @@ namespace Frog {
     EcsSystems _systems;
     EcsWorld _world;
 
-    ActorView CreateView(ActorConfig config) {
-      var actor = Instantiate(_actorPrefab, Vector3.zero, Quaternion.identity, transform);
-      actor.Initialize(config);
-      return actor;
-    }
-
 #pragma warning disable IDE0051
     void Start() {
       _world = new EcsWorld();
@@ -39,16 +33,18 @@ namespace Frog {
 
       var playerEntity = _world.NewEntity();
       _world.AddComponent(playerEntity, new Player());
-      _world.AddComponent(playerEntity, new Body(Vector2Int.zero));
+      _world.AddComponent(playerEntity, new Body(
+        new Vector2Int(map.Width / 2, 0),
+        _settings.FrogActor
+      ));
       _world.AddComponent(playerEntity, new Move(Vector2Int.zero));
-      _world.AddComponent(playerEntity, new View(CreateView(_settings.FrogActor)));
 
       _systems
         .Add(new InputSystem(playerEntity))
         .AddGroup(Group.Turn, false, null,
           new MoveSystem(),
           new DisableGroupSystem(Group.Turn),
-          new ViewSystem()
+          new ViewSystem(transform, _actorPrefab)
         );
 
 #if UNITY_EDITOR
