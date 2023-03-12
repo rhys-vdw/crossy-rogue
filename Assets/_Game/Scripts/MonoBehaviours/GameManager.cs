@@ -27,7 +27,7 @@ namespace Frog {
       var map = new Map(_settings.MapSize);
       for (var y = 0; y < map.Height; y++) {
         for (var x = 0; x < map.Width; x++) {
-          map.SetTile(x, y, _settings.GrassTile);
+          map.SetTile(x, y, _settings.GrassTile.Sample());
         }
       }
       _mapManager.Initialize(map);

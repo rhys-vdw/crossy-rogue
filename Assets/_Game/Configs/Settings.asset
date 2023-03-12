@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <MapSize>k__BackingField: {x: 32, y: 640}
   <FrogActor>k__BackingField: {fileID: 11400000, guid: 4adcd10b67923214cac3c30beea8ea7a, type: 2}
-  <GrassTile>k__BackingField: {fileID: 11400000, guid: 0f567f98c3e053d4cbbae471070b1702, type: 2}
+  <GrassTile>k__BackingField: {fileID: 11400000, guid: 2fe211d90ec34564ca6f9370608475c3, type: 2}

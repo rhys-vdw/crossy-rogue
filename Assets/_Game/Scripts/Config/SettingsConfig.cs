@@ -13,6 +13,6 @@ namespace Frog {
 
     [field: Header("Tiles")]
     [field: SerializeField]
-    public TileConfig GrassTile { get; private set; }
+    public TileProbabilityConfig GrassTile { get; private set; }
   }
 }
