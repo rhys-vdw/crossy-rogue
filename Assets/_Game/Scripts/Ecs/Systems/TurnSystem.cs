@@ -1,22 +1,19 @@
 using Leopotam.EcsLite;
-using UnityEngine;
+using Leopotam.EcsLite.Di;
 
 namespace Frog {
-  class TurnSystem : IEcsPreInitSystem, IEcsRunSystem {
-    EcsPool<TimeState> _timeStates;
-    readonly int _timeEntity;
-
-    public TurnSystem(int timeEntity) {
-      _timeEntity = timeEntity;
-    }
-
-    public void PreInit(IEcsSystems systems) {
-      _timeStates = systems.GetWorld().GetPool<TimeState>();
-    }
+  class TurnSystem : IEcsRunSystem {
+    EcsWorldInject _world;
+    EcsPoolInject<TimeState> _timeStates;
+    EcsCustomInject<Shared> _shared;
 
     public void Run(IEcsSystems systems) {
-      ref var time = ref _timeStates.Get(_timeEntity);
-      time.TurnCount++;
+      ref var time = ref _timeStates.Value.Get(_shared.Value.TimeEntity);
+      if (time.MovesToResolve == 0) {
+        time.MovesToResolve = ActorConfig.MaxSpeed;
+        time.TurnCount++;
+        _world.Value.SetGroup(Group.Turn, false);
+      }
     }
   }
 }

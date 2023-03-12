@@ -4,7 +4,9 @@ using Random = UnityEngine.Random;
 
 namespace Frog {
   abstract class ProbabilityConfig<T> : ScriptableObject {
+#pragma warning disable IDE0044
     [SerializeField] Entry[] _entries;
+#pragma warning restore IDE0044
 
     [Serializable]
     public struct Entry {

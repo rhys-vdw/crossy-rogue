@@ -8,6 +8,7 @@ namespace Frog {
 
   struct TimeState {
     public int TurnCount;
+    public int MovesToResolve;
   }
 
   struct Move {

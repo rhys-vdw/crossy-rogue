@@ -8,15 +8,18 @@ using Leopotam.EcsLite.Di;
 namespace Frog {
   class Shared {
     public readonly int PlayerEntity;
+    public readonly int TimeEntity;
     public readonly Transform ViewParent;
     public readonly Camera Camera;
 
     public Shared(
       int playerEntity,
+      int timeEntity,
       Transform viewParent,
       Camera camera
     ) {
       PlayerEntity = playerEntity;
+      TimeEntity = timeEntity;
       ViewParent = viewParent;
       Camera = camera;
     }
@@ -56,16 +59,18 @@ namespace Frog {
       ));
       _world.AddComponent(playerEntity, new Move(Vector2Int.zero));
 
+      var timeEntity = _world.NewEntity();
+      _world.AddComponent(timeEntity, new TimeState());
+
       var shared = new Shared(
         playerEntity,
+        timeEntity,
         transform,
         _camera
       );
 
-      var timeEntity = _world.NewEntity();
-      _world.AddComponent(timeEntity, new TimeState());
-
       _systems
+        .Add(new TurnSystem())
         .AddGroup(Group.Input, true, null,
           new InputSystem(playerEntity)
         )
@@ -79,9 +84,7 @@ namespace Frog {
           new MoveViewSystem(),
           new DeadViewSystem(),
           new CameraSystem(),
-          new DisableGroupSystem(Group.Turn),
-          new DeleteMarkedSystem(),
-          new TurnSystem(timeEntity)
+          new DeleteMarkedSystem()
         );
 
 #if UNITY_EDITOR
