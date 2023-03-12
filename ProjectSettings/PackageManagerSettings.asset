@@ -30,6 +30,7 @@ MonoBehaviour:
     m_Url: https://package.openupm.com
     m_Scopes:
     - com.leopotam.ecslite
+    - com.leopotam.ecslite.extendedsystems
     - com.openupm
     m_IsDefault: 0
     m_Capabilities: 0
