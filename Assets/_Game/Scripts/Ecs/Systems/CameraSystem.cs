@@ -22,7 +22,7 @@ namespace Frog {
 
     public void Run(IEcsSystems systems) {
       ref var actor = ref _actors.Get(_playerEntity);
-      var minY = _camera.orthographicSize;
+      var minY = _camera.orthographicSize - 0.5f;
       var t = _camera.transform;
       t.position = new(
         _x,
