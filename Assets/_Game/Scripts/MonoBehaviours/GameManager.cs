@@ -25,11 +25,7 @@ namespace Frog {
       _systems = new EcsSystems(_world);
 
       var map = new Map(_settings.MapSize);
-      for (var y = 0; y < map.Height; y++) {
-        for (var x = 0; x < map.Width; x++) {
-          map.SetTile(x, y, _settings.GrassTile.Sample());
-        }
-      }
+      MapGenerator.Grass(map, 0, map.Height, _settings);
       _mapManager.Initialize(map);
 
       var playerEntity = _world.NewEntity();
