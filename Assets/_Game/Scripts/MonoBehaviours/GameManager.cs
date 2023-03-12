@@ -1,20 +1,23 @@
+#pragma warning disable IDE0044
+
 using UnityEngine;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.ExtendedSystems;
 
 namespace Frog {
-  public class GameManager : MonoBehaviour {
+  class GameManager : MonoBehaviour {
+    [Header("Config")]
+    [SerializeField] ActorConfig _frogConfig;
 
     [Header("Sprites")]
     [SerializeField] ActorView _actorPrefab;
-    [SerializeField] Sprite _playerSprite;
 
     EcsSystems _systems;
     EcsWorld _world;
 
-    public ActorView CreateView(Sprite sprite, Color color) {
+    ActorView CreateView(ActorConfig config) {
       var actor = Instantiate(_actorPrefab, Vector3.zero, Quaternion.identity, transform);
-      actor.Initialize(sprite, color);
+      actor.Initialize(config);
       return actor;
     }
 
@@ -27,7 +30,7 @@ namespace Frog {
       _world.AddComponent(playerEntity, new Player());
       _world.AddComponent(playerEntity, new Body(Vector2Int.zero));
       _world.AddComponent(playerEntity, new Move(Vector2Int.zero));
-      _world.AddComponent(playerEntity, new View(CreateView(_playerSprite, Color.green)));
+      _world.AddComponent(playerEntity, new View(CreateView(_frogConfig)));
 
       _systems
         .Add(new InputSystem(playerEntity))

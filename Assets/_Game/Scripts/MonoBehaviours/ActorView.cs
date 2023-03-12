@@ -1,12 +1,14 @@
+#pragma warning disable IDE0044
+
 using UnityEngine;
 
 namespace Frog {
-  public class ActorView : MonoBehaviour {
+  class ActorView : MonoBehaviour {
     [SerializeField] SpriteRenderer _renderer;
 
-    public void Initialize(Sprite sprite, Color color) {
-      _renderer.sprite = sprite;
-      _renderer.color = color;
+    public void Initialize(ActorConfig config) {
+      _renderer.sprite = config.Sprite;
+      _renderer.color = config.Color;
     }
   }
 }
