@@ -42,6 +42,7 @@ namespace Frog {
         .Add(new InputSystem(playerEntity))
         .AddGroup(Group.Turn, false, null,
           new MoveSystem(),
+          new PlayerBoundsSystem(_settings.MapSize),
           new DisableGroupSystem(Group.Turn),
           new ViewSystem(transform, _actorPrefab),
           new CameraSystem(playerEntity, _camera, map.Width)
