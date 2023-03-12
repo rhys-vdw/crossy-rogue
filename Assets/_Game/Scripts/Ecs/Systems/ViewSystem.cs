@@ -8,6 +8,7 @@ namespace Frog {
     EcsFilter _viewFilter;
     EcsPool<Body> _bodies;
     EcsPool<View> _views;
+    EcsPool<Move> _moves;
     readonly Transform _viewParent;
     readonly ActorView _actorPrefab;
 
@@ -22,6 +23,7 @@ namespace Frog {
       _viewFilter = _world.Filter<View>().End();
       _bodies = _world.GetPool<Body>();
       _views = _world.GetPool<View>();
+      _moves = _world.GetPool<Move>();
     }
 
     public void Run(IEcsSystems systems) {
@@ -43,6 +45,10 @@ namespace Frog {
           b.Position.y,
           0
         );
+        if (_moves.Has(entity)) {
+          ref var move = ref _moves.Get(entity);
+          v.ActorView.SetDirection(move.Direction);
+        }
       }
     }
 
