@@ -14,7 +14,7 @@ namespace Frog {
       var minY = camera.orthographicSize - 0.5f;
       var t = camera.transform;
       t.position = new(
-        _map.Value.Width / 2f,
+        _map.Value.Width / 2f - 0.5f,
         Mathf.Max(actor.Position.y, minY),
         t.position.z
       );
