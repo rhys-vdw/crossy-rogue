@@ -6,6 +6,14 @@ using Leopotam.EcsLite.ExtendedSystems;
 using Leopotam.EcsLite.Di;
 
 namespace Frog {
+  class Shared {
+    public readonly int PlayerEntity;
+
+    public Shared(int playerEntity) {
+      PlayerEntity = playerEntity;
+    }
+  }
+
   class GameManager : MonoBehaviour {
     [Header("Scene")]
     [SerializeField] MapManager _mapManager;
@@ -43,11 +51,15 @@ namespace Frog {
       ));
       _world.AddComponent(playerEntity, new Move(Vector2Int.zero));
 
+      var shared = new Shared(playerEntity);
+
       var timeEntity = _world.NewEntity();
       _world.AddComponent(timeEntity, new TimeState());
 
       _systems
-        .Add(new InputSystem(playerEntity))
+        .AddGroup(Group.Input, true, null,
+          new InputSystem(playerEntity)
+        )
         .AddGroup(Group.Turn, false, null,
           new SpawnerSystem(map, timeEntity),
           new MoveSystem(),
@@ -56,9 +68,7 @@ namespace Frog {
           new PlayerBoundsSystem(_settings.MapSize),
           new ViewSystem(transform, _actorPrefab),
           new CameraSystem(playerEntity, _camera, map.Width),
-          new DisableGroupSystem(Group.Turn)
-        )
-        .AddGroup(Group.Finalize, true, null,
+          new DisableGroupSystem(Group.Turn),
           new DeleteMarkedSystem(),
           new TurnSystem(timeEntity)
         );
@@ -72,7 +82,8 @@ namespace Frog {
       _systems
         .Inject(
           map,
-          _settings
+          _settings,
+          shared
         )
         .Inject()
         .Init();
