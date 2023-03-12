@@ -6,6 +6,9 @@ using Leopotam.EcsLite.ExtendedSystems;
 
 namespace Frog {
   class GameManager : MonoBehaviour {
+    [Header("Scene")]
+    [SerializeField] MapManager _mapManager;
+
     [Header("Config")]
     [SerializeField] SettingsConfig _settings;
 
@@ -26,11 +29,19 @@ namespace Frog {
       _world = new EcsWorld();
       _systems = new EcsSystems(_world);
 
+      var map = new Map(_settings.MapSize);
+      for (var y = 0; y < map.Height; y++) {
+        for (var x = 0; x < map.Width; x++) {
+          map.SetTile(x, y, _settings.GrassTile);
+        }
+      }
+      _mapManager.Initialize(map);
+
       var playerEntity = _world.NewEntity();
       _world.AddComponent(playerEntity, new Player());
       _world.AddComponent(playerEntity, new Body(Vector2Int.zero));
       _world.AddComponent(playerEntity, new Move(Vector2Int.zero));
-      _world.AddComponent(playerEntity, new View(CreateView(_settings.FrogConfig)));
+      _world.AddComponent(playerEntity, new View(CreateView(_settings.FrogActor)));
 
       _systems
         .Add(new InputSystem(playerEntity))

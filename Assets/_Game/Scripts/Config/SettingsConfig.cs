@@ -9,6 +9,10 @@ namespace Frog {
 
     [field: Header("Actors")]
     [field: SerializeField]
-    public ActorConfig FrogConfig { get; private set; }
+    public ActorConfig FrogActor { get; private set; }
+
+    [field: Header("Tiles")]
+    [field: SerializeField]
+    public TileConfig GrassTile { get; private set; }
   }
 }
