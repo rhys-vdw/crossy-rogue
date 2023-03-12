@@ -7,7 +7,7 @@ using Leopotam.EcsLite.ExtendedSystems;
 namespace Frog {
   class GameManager : MonoBehaviour {
     [Header("Config")]
-    [SerializeField] ActorConfig _frogConfig;
+    [SerializeField] SettingsConfig _settings;
 
     [Header("Sprites")]
     [SerializeField] ActorView _actorPrefab;
@@ -30,7 +30,7 @@ namespace Frog {
       _world.AddComponent(playerEntity, new Player());
       _world.AddComponent(playerEntity, new Body(Vector2Int.zero));
       _world.AddComponent(playerEntity, new Move(Vector2Int.zero));
-      _world.AddComponent(playerEntity, new View(CreateView(_frogConfig)));
+      _world.AddComponent(playerEntity, new View(CreateView(_settings.FrogConfig)));
 
       _systems
         .Add(new InputSystem(playerEntity))
