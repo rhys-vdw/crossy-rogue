@@ -18,4 +18,12 @@ namespace Frog {
       Position = position;
     }
   }
+
+  struct View {
+    public ActorView ActorView;
+
+    public View(ActorView view) {
+      ActorView = view;
+    }
+  }
 }

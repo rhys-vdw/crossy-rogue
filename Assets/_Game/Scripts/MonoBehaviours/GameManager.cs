@@ -4,8 +4,19 @@ using Leopotam.EcsLite.ExtendedSystems;
 
 namespace Frog {
   public class GameManager : MonoBehaviour {
+
+    [Header("Sprites")]
+    [SerializeField] ActorView _actorPrefab;
+    [SerializeField] Sprite _playerSprite;
+
     EcsSystems _systems;
     EcsWorld _world;
+
+    public ActorView CreateView(Sprite sprite, Color color) {
+      var actor = Instantiate(_actorPrefab, Vector3.zero, Quaternion.identity, transform);
+      actor.Initialize(sprite, color);
+      return actor;
+    }
 
 #pragma warning disable IDE0051
     void Start() {
@@ -14,14 +25,16 @@ namespace Frog {
 
       var playerEntity = _world.NewEntity();
       _world.AddComponent(playerEntity, new Player());
-      _world.AddComponent(playerEntity, new Transform(Vector2Int.zero));
+      _world.AddComponent(playerEntity, new Body(Vector2Int.zero));
       _world.AddComponent(playerEntity, new Move(Vector2Int.zero));
+      _world.AddComponent(playerEntity, new View(CreateView(_playerSprite, Color.green)));
 
       _systems
         .Add(new InputSystem(playerEntity))
         .AddGroup(Group.Turn, false, null,
           new MoveSystem(),
-          new DisableGroupSystem(Group.Turn)
+          new DisableGroupSystem(Group.Turn),
+          new ViewSystem()
         );
 
 #if UNITY_EDITOR
