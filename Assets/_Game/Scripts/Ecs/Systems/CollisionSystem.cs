@@ -7,6 +7,7 @@ namespace Frog {
     readonly EcsFilterInject<Inc<Collision>> _filter;
     readonly EcsPoolInject<Body> _actors;
     readonly EcsPoolInject<Dead> _dead;
+    readonly EcsPoolInject<MarkedForDeletion> _delete;
 
     public void Run(IEcsSystems systems) {
       foreach (var entity in _filter.Value) {
@@ -20,6 +21,7 @@ namespace Frog {
         if (b.Config.CombatStrength >= a.Config.CombatStrength) {
           _dead.Value.Add(c.EntityA);
         }
+        _delete.Value.Add(entity);
       }
     }
   }
