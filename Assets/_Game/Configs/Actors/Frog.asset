@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca72b6feacfc9f84392946f721dcf627, type: 3}
   m_Name: Frog
   m_EditorClassIdentifier: 
-  <Sprite>k__BackingField: {fileID: 3286163911610860551, guid: 329b6d02095d362479987cc8df83844a, type: 3}
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 064674e7c3b35004589d0c57c0c4eb63, type: 3}
   <Color>k__BackingField: {r: 0.75294125, g: 0.7803922, b: 0.25490198, a: 1}
   <Length>k__BackingField: 1
