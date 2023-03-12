@@ -21,10 +21,8 @@ namespace Frog {
       _spawners = _world.GetPool<Spawner>();
       _timeStates = _world.GetPool<TimeState>();
 
-      Debug.Log($"About to create {_map.Spawners.Count} spawners!");
       foreach (var info in _map.Spawners) {
         var entity = _world.NewEntity();
-        Debug.Log("Creating spawners " + entity);
         ref var spawner = ref _spawners.Add(entity);
         spawner.Info = info;
         spawner.NextSpawnTurn = info.Config.RandomInterval();
