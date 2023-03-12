@@ -26,8 +26,11 @@ namespace Frog {
 
       var map = new Map(_settings.MapSize);
       MapGenerator.Grass(map, 0, map.Height, _settings);
-      MapGenerator.Road(map, 8, 3, _settings);
-      MapGenerator.SetSpawners(map, 8, 3, _settings.RoadSpawners);
+      for (var i = 0; i < _settings.RoadSpawners.Count; i++) {
+        var start = 8 * i;
+        MapGenerator.Road(map, start, 3, _settings);
+        MapGenerator.SetSpawners(map, start, 3, _settings.RoadSpawners[i]);
+      }
       MapGenerator.River(map, 4, 3, _settings);
       _mapManager.Initialize(map);
 

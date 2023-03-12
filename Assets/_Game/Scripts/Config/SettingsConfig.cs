@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace Frog {
   [CreateAssetMenu(menuName = nameof(Frog) + "/" + nameof(SettingsConfig))]
@@ -24,8 +25,11 @@ namespace Frog {
     public TileConfig Water { get; private set; }
 
     [field: Header("Spawners")]
-    [field: SerializeField]
-    public SpawnerProbabilityConfig RoadSpawners { get; private set; }
-    public SpawnerProbabilityConfig RiverSpawners { get; private set; }
+#pragma warning disable IDE0044
+    [SerializeField] SpawnerProbabilityConfig[] _roadSpawners;
+    [SerializeField] SpawnerProbabilityConfig[] _riverSpawners;
+#pragma warning restore IDE0044
+    public IReadOnlyList<SpawnerProbabilityConfig> RoadSpawners => _roadSpawners;
+    public IReadOnlyList<SpawnerProbabilityConfig> RiverSpawners => _riverSpawners;
   }
 }

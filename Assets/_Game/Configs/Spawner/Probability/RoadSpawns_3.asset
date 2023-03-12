@@ -10,8 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c15be7137339f2948b712f3c92468a99, type: 3}
-  m_Name: EasyRoadSpawners
+  m_Name: RoadSpawns_3
   m_EditorClassIdentifier: 
   _entries:
   - Weight: 1
-    Value: {fileID: 11400000, guid: 91dd24e1c7bf78a498e814e658b1d5da, type: 2}
+    Value: {fileID: 11400000, guid: 774ce68742b128e45bab5738651bfc9c, type: 2}
+  - Weight: 2
+    Value: {fileID: 11400000, guid: a987ba5d591429a478b644d92a704f14, type: 2}

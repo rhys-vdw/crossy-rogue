@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1a3c28b1c139dd40bdffde6a6fb85a6, type: 3}
-  m_Name: SparseSmallCarSpawner
+  m_Script: {fileID: 11500000, guid: c15be7137339f2948b712f3c92468a99, type: 3}
+  m_Name: RoadSpawns_1
   m_EditorClassIdentifier: 
-  <Actor>k__BackingField: {fileID: 11400000, guid: 0ef783219a12bb948b11adbaf9e67881, type: 2}
-  <MinInterval>k__BackingField: 4
-  <MaxInterval>k__BackingField: 8
+  _entries:
+  - Weight: 1
+    Value: {fileID: 11400000, guid: 91dd24e1c7bf78a498e814e658b1d5da, type: 2}
