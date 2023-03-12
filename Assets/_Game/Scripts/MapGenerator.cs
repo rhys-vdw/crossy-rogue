@@ -13,6 +13,15 @@ namespace Frog {
       }
     }
 
+    public static void River(Map map, int startY, int height, SettingsConfig settings) {
+      var max = startY + height;
+      for (var y = startY; y < max; y++) {
+        for (var x = 0; x < map.Width; x++) {
+          map.SetTile(x, y, settings.Water);
+        }
+      }
+    }
+
     public static void Road(Map map, int startY, int height, SettingsConfig settings) {
       for (var x = 0; x < map.Width; x++) {
         map.SetTile(x, startY, settings.RoadBottom);

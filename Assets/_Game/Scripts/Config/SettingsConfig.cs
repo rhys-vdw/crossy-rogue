@@ -20,5 +20,7 @@ namespace Frog {
     public TileConfig RoadMiddle { get; private set; }
     [field: SerializeField]
     public TileConfig RoadBottom { get; private set; }
+    [field: SerializeField]
+    public TileConfig Water { get; private set; }
   }
 }

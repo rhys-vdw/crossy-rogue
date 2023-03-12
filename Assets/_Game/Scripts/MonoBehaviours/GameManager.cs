@@ -27,6 +27,7 @@ namespace Frog {
       var map = new Map(_settings.MapSize);
       MapGenerator.Grass(map, 0, map.Height, _settings);
       MapGenerator.Road(map, 8, 3, _settings);
+      MapGenerator.River(map, 4, 3, _settings);
       _mapManager.Initialize(map);
 
       var playerEntity = _world.NewEntity();
