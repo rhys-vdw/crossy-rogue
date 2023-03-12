@@ -1,6 +1,7 @@
 #pragma warning disable IDE0044
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.ExtendedSystems;
 using Leopotam.EcsLite.Di;
@@ -104,6 +105,9 @@ namespace Frog {
     }
 
     void Update() {
+      if (Input.GetKeyDown(KeyCode.F2)) {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+      }
       _systems.Run();
     }
 #pragma warning restore IDE0051
