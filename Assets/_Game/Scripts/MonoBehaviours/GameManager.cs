@@ -8,6 +8,7 @@ namespace Frog {
   class GameManager : MonoBehaviour {
     [Header("Scene")]
     [SerializeField] MapManager _mapManager;
+    [SerializeField] Camera _camera;
 
     [Header("Config")]
     [SerializeField] SettingsConfig _settings;
@@ -44,7 +45,8 @@ namespace Frog {
         .AddGroup(Group.Turn, false, null,
           new MoveSystem(),
           new DisableGroupSystem(Group.Turn),
-          new ViewSystem(transform, _actorPrefab)
+          new ViewSystem(transform, _actorPrefab),
+          new CameraSystem(playerEntity, _camera, map.Width)
         );
 
 #if UNITY_EDITOR
