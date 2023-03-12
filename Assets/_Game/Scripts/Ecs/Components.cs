@@ -11,10 +11,10 @@ namespace Frog {
     }
   }
 
-  struct Transform {
+  struct Body {
     public Vector2Int Position;
 
-    public Transform(Vector2Int position) {
+    public Body(Vector2Int position) {
       Position = position;
     }
   }

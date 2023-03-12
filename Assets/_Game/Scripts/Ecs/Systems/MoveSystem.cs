@@ -5,13 +5,13 @@ namespace Frog {
     EcsWorld _world;
     EcsFilter _filter;
     EcsPool<Move> _moves;
-    EcsPool<Transform> _transforms;
+    EcsPool<Body> _transforms;
 
     public void PreInit(IEcsSystems systems) {
       _world = systems.GetWorld();
       _filter = _world.Filter<Move>().End();
       _moves = _world.GetPool<Move>();
-      _transforms = _world.GetPool<Transform>();
+      _transforms = _world.GetPool<Body>();
     }
 
     public void Run(IEcsSystems systems) {
