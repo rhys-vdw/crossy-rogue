@@ -73,14 +73,14 @@ namespace Frog {
       _systems
         .Add(new TurnSystem())
         .AddGroup(Group.Input, true, null,
-          new InputSystem(playerEntity)
+          new InputSystem()
         )
         .AddGroup(Group.Turn, false, null,
-          new SpawnerSystem(map, timeEntity),
+          new SpawnerSystem(),
           new MoveSystem(),
           new CollisionSystem(),
           new DeadSystem(),
-          new PlayerBoundsSystem(_settings.MapSize),
+          new PlayerBoundsSystem(),
           new CreateViewsSystem(),
           new MoveViewSystem(),
           new DeadViewSystem(),

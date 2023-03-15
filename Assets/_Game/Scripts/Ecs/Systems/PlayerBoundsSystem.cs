@@ -1,27 +1,17 @@
 using Leopotam.EcsLite;
+using Leopotam.EcsLite.Di;
 using UnityEngine;
 
 namespace Frog {
-  class PlayerBoundsSystem : IEcsPreInitSystem, IEcsRunSystem {
-    EcsWorld _world;
-    EcsPool<Body> _actors;
-    EcsFilter _filter;
-    Vector2Int _bounds;
-
-    public PlayerBoundsSystem(Vector2Int bounds) {
-      _bounds = bounds;
-    }
-
-    public void PreInit(IEcsSystems systems) {
-      _world = systems.GetWorld();
-      _actors = _world.GetPool<Body>();
-      _filter = _world.Filter<Player>().End();
-    }
+  class PlayerBoundsSystem : IEcsRunSystem {
+    EcsPoolInject<Body> _actors;
+    EcsFilterInject<Inc<Player>> _filter;
+    EcsCustomInject<SettingsConfig> _settings;
 
     public void Run(IEcsSystems systems) {
-      foreach (var entity in _filter) {
-        ref var actor = ref _actors.Get(entity);
-        actor.Position.Clamp(Vector2Int.zero, _bounds);
+      foreach (var entity in _filter.Value) {
+        ref var actor = ref _actors.Value.Get(entity);
+        actor.Position.Clamp(Vector2Int.zero, _settings.Value.MapSize);
       }
     }
   }

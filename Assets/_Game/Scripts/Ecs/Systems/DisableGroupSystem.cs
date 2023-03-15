@@ -1,20 +1,17 @@
 using Leopotam.EcsLite;
+using Leopotam.EcsLite.Di;
 
 namespace Frog {
-  class DisableGroupSystem : IEcsPreInitSystem, IEcsRunSystem {
-    EcsWorld _world;
+  class DisableGroupSystem : IEcsRunSystem {
+    EcsWorldInject _world = default;
     readonly string _groupName;
 
     public DisableGroupSystem(string groupName) {
       _groupName = groupName;
     }
 
-    public void PreInit(IEcsSystems systems) {
-      _world = systems.GetWorld();
-    }
-
     public void Run(IEcsSystems systems) {
-      _world.SetGroup(_groupName, false);
+      _world.Value.SetGroup(_groupName, false);
     }
   }
 }

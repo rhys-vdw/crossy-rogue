@@ -1,26 +1,17 @@
 using Leopotam.EcsLite;
-using Leopotam.EcsLite.ExtendedSystems;
+using Leopotam.EcsLite.Di;
 using UnityEngine;
 
 namespace Frog {
-  class InputSystem : IEcsPreInitSystem, IEcsRunSystem {
+  class InputSystem : IEcsRunSystem {
     static readonly KeyCode[] UpKeys = new [] { KeyCode.UpArrow, KeyCode.W, KeyCode.Z };
     static readonly KeyCode[] RightKeys = new [] { KeyCode.RightArrow, KeyCode.D };
     static readonly KeyCode[] DownKeys = new [] { KeyCode.DownArrow, KeyCode.S };
     static readonly KeyCode[] LeftKeys = new [] { KeyCode.LeftArrow, KeyCode.A, KeyCode.Q };
 
-    EcsWorld _world;
-    EcsPool<Move> _moves;
-    readonly int _playerEntity;
-
-    public InputSystem(int playerEntity) {
-      _playerEntity = playerEntity;
-    }
-
-    public void PreInit(IEcsSystems systems) {
-      _world = systems.GetWorld();
-      _moves = _world.GetPool<Move>();
-    }
+    EcsWorldInject _world = default;
+    EcsPoolInject<Move> _moves;
+    EcsCustomInject<Shared> _shared;
 
     public void Run(IEcsSystems systems) {
       var direction = new Vector2Int();
@@ -39,11 +30,11 @@ namespace Frog {
 
       if (direction != Vector2Int.zero) {
         // Set move.
-        ref var move = ref _moves.Get(_playerEntity);
+        ref var move = ref _moves.Value.Get(_shared.Value.PlayerEntity);
         move.Direction = direction;
 
         // Enable turn.
-        _world.SetGroup(Group.Turn, true);
+        _world.Value.SetGroup(Group.Turn, true);
       }
     }
 
